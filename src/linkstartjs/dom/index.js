@@ -88,6 +88,30 @@ LinksStartJsDomUtil.applyModelBindings = function(page) {
   return model;
 }
 
+LinksStartJsDomUtil.getModelElementById = function(page, id) {
+
+  var model = {};
+
+  let modelElements = page.getModelElements();
+  if (typeof modelElements === 'undefined' || modelElements.length == 0) {
+    return;
+  }
+
+  var element;
+
+  for (let modelElement of modelElements) {
+    let tagId = modelElement.tagId;
+    let lsId = modelElement.lsId;
+    if ((tagId && lsId) && tagId == id) {
+      element = getElementByLsId(lsId);
+      break;
+    }
+  }
+
+  return element;
+}
+
+
 function getDefaultCheckboxValue(checkboxElement) {
   if(checkboxElement.checked === true){
     return true;
